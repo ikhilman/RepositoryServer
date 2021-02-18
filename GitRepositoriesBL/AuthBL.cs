@@ -13,6 +13,12 @@ namespace GitRepositoriesBL
     {
         private const string Secret = "db3OIsj+BXE9NZDy0t8W3TcNekrF+2d/1sFnWG4HnV8TZY30iTOdtVWJG8abWvB1GlOgJuQZdcF2Luqm/hccMw==";
 
+        /// <summary>
+        /// Authenticate User By username and password
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public string AuthUser(string username, string password)
         {
             if (IsAuthenticationValid(username, password))
@@ -25,6 +31,12 @@ namespace GitRepositoriesBL
             }
         }
 
+        /// <summary>
+        /// Generate User Token
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="expireMinutes"></param>
+        /// <returns></returns>
         private string GenerateToken(string username, int expireMinutes = 20)
         {
             var symmetricKey = Convert.FromBase64String(Secret);
@@ -55,6 +67,11 @@ namespace GitRepositoriesBL
             return true;
         }
 
+        /// <summary>
+        /// Parse JWT Token
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
         public ClaimsPrincipal GetPrincipal(string token)
         {
             try

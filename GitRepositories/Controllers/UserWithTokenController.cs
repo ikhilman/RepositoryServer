@@ -21,9 +21,11 @@ namespace GitRepositories.Controllers
 
             if (hasAuthKey)
             {
+                // Check is authentication token exist in header
                 string UserToken = request.Headers
                     .GetValues("authKey")?.FirstOrDefault();
 
+                // Parse token and get encrypted username
                 var simplePrinciple = new AuthBL().GetPrincipal(UserToken);
                 var identity = simplePrinciple?.Identity as ClaimsIdentity;
                 if (identity == null)
@@ -34,6 +36,7 @@ namespace GitRepositories.Controllers
 
                 var usernameClaim = identity.FindFirst(ClaimTypes.Name);
                 UserName = usernameClaim?.Value;
+                //******************************************
 
                 if (string.IsNullOrEmpty(UserName))
                 {

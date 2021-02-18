@@ -11,8 +11,14 @@ namespace GitRepositoriesBL
 {
     public class RepositoryBL
     {
+        /// <summary>
+        /// Get Repositories by user request string
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public RepositoryResponse GetRepositories(string value)
         {
+            // GitHub search repositories url
             string uri = "https://api.github.com/search/repositories?q=" + value;
             RepositoryResponse Response = null;
             try
@@ -26,6 +32,12 @@ namespace GitRepositoriesBL
             return Response;
         }
 
+        /// <summary>
+        /// Add remove bookmarks to cache
+        /// </summary>
+        /// <param name="UserName"></param>
+        /// <param name="Repository"></param>
+        /// <param name="Action"></param>
         public void BookmarkRepository(string UserName, int Repository, BookmarkAction Action)
         {
             Dictionary<string, List<int>> dic = HttpContext.Current.Cache["Repositories"] as Dictionary<string, List<int>>;
@@ -59,6 +71,12 @@ namespace GitRepositoriesBL
             }
         }
 
+
+        /// <summary>
+        /// Get stored user bookmarks
+        /// </summary>
+        /// <param name="UserName"></param>
+        /// <returns></returns>
         public List<int> GetBookmarksByUserName(string UserName)
         {
             Dictionary<string, List<int>> dic = HttpContext.Current.Cache["Repositories"] as Dictionary<string, List<int>>;

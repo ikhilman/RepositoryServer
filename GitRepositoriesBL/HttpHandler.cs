@@ -12,6 +12,12 @@ namespace GitRepositoriesBL
 {
     public class HttpHandler
     {
+
+        /// <summary>
+        /// Http Get Request Handler
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
         public string Get(string url)
         {
             string str_ReturnValue = "";
